@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Arvostelun muokkaus </title>
+</head>
+
+<body>
+    <h1> Arvostelun muokkaus </h1>
+    <form action="/update_book" method="post">
+        <p>
+            Arvostelu: <br />
+            <textarea name="review" rows="8" cols="80">{{ book.review }}</textarea>
+        </p>
+        <input type="hidden" name="book_id" value="{{ book.id }}"/>
+        <input type="submit" value="Päivitä arvostelua" />
+    </form>
+</body>
+
+
+</html>
