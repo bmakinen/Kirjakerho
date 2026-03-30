@@ -27,6 +27,8 @@ def find_book():
 @app.route("/book/<int:book_id>")
 def show_book(book_id):
     book = books.get_book(book_id)
+    if not book:
+        abort(404)
     return render_template("show_book.html", book=book)
 
 @app.route("/new_book")
@@ -47,6 +49,8 @@ def create_book():
 @app.route("/edit_book/<int:book_id>")
 def edit_book(book_id):
     book = books.get_book(book_id)
+    if not book:
+        abort(404)
     if book["user_id"] != session["user_id"]:
         abort(403)
     return render_template("edit_book.html", book=book)
@@ -55,9 +59,11 @@ def edit_book(book_id):
 def update_book():
     book_id = request.form["book_id"]
     book = books.get_book(book_id)
+    if not book:
+        abort(404)
     if book["user_id"] != session["user_id"]:
         abort(403)
-        
+
     review = request.form["review"]
 
     books.update_book(book_id, review)
@@ -67,6 +73,9 @@ def update_book():
 @app.route("/remove_book/<int:book_id>", methods=["GET", "POST"])
 def remove_book(book_id):
     book = books.get_book(book_id)
+
+    if not book:
+        abort(404)
     if book["user_id"] != session["user_id"]:
         abort(403)
 
