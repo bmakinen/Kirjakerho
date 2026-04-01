@@ -45,8 +45,14 @@ def create_book():
     require_login()
 
     title = request.form["title"]
+    if len(title) > 50:
+        abort(403)
     author = request.form["author"]
+    if len(author) > 50:
+        abort(403)
     review = request.form["review"]
+    if len(review) > 1000:
+        abort(403)
     user_id = session["user_id"]
 
     books.add_book(title, author, review, user_id)
