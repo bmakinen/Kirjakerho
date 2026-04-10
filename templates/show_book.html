@@ -20,7 +20,7 @@
         Arvostelu: {{ book.review }}
     </p>
     <p>
-        Käyttäjä: {{ book.username }}
+        Käyttäjä: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
     </p>
     <p>
         <a href="/">Takaisin</a>
