@@ -13,12 +13,36 @@
       <input type="text" name="title" maxlength="50" />
     </p>
     <p>
-        Kirjailija: <br />
-        <input type="text" name="author" maxlength="50"/>
+      Kirjailija: <br />
+      <input type="text" name="author" maxlength="50"/>
     </p>
     <p>
-        Arvostelu: <br />
-        <textarea name="review" rows="8" cols="80" maxlength="1000"></textarea>
+      Arvosana: <br />
+      <select name="grade">
+        <option value="">Valitse</option>
+        <option value="*">*</option>
+        <option value="**">**</option>
+        <option value="***">***</option>
+        <option value="****">****</option>
+        <option value="*****">*****</option>
+      </select>
+    </p>
+    <p>
+      Arvostelu: <br />
+      <textarea name="review" rows="8" cols="80" maxlength="1000"></textarea>
+    </p>
+    <p>
+      Genre: <br />
+      <select name="genre">
+        <option value="">Valitse</option>
+        <option value="Dekkarit">Dekkarit</option>
+        <option value="Klassikot">Klassikot</option>
+        <option value="Kauhu">Kauhu</option>
+        <option value="Romantiikka">Romantiikka</option>
+        <option value="Fantasia">Fantasia</option>
+        <option value="Lapset ja nuoret">Lapset ja nuoret</option>
+        <option value="Elämäkerrat">Elämäkerrat</option>
+      </select>
     </p>
     <input type="submit" value="Luo arvostelu" />
   </form>

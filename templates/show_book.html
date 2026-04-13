@@ -16,6 +16,13 @@
     <p>
         {{ book.author }}
     </p>
+    {% if classes %}
+    <ul>
+        {% for class in classes %}
+        <li>{{ class.title }}: {{ class.value }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <p>
         Arvostelu: {{ book.review }}
     </p>
