@@ -48,7 +48,8 @@ def show_book(book_id):
 @app.route("/new_book")
 def new_book():
     require_login()
-    return render_template("new_book.html")
+    classes = books.get_all_classes()
+    return render_template("new_book.html", classes=classes)
 
 @app.route("/create_book", methods=["POST"])
 def create_book():
@@ -66,12 +67,10 @@ def create_book():
     user_id = session["user_id"]
 
     classes = []
-    grade = request.form["grade"]
-    if grade:
-        classes.append(("Arvosana", grade))
-    genre = request.form["genre"]
-    if genre:
-        classes.append(("Genre", genre))
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts = entry.split(":")
+            classes.append((parts[0], parts[1]))
 
     books.add_book(title, author, review, user_id, classes)
 

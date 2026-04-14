@@ -16,33 +16,22 @@
       Kirjailija: <br />
       <input type="text" name="author" maxlength="50"/>
     </p>
+
+    {% for class in classes %}
     <p>
-      Arvosana: <br />
-      <select name="grade">
-        <option value="">Valitse</option>
-        <option value="*">*</option>
-        <option value="**">**</option>
-        <option value="***">***</option>
-        <option value="****">****</option>
-        <option value="*****">*****</option>
+      {{ class }}: <br />
+      <select name="classes">
+        <option value="">valitse</option>
+      {% for option in classes[class] %}
+        <option value="{{ class }}:{{ option }}">{{ option }}</option>
+      {% endfor %}
       </select>
     </p>
+    {% endfor %}
+
     <p>
       Arvostelu: <br />
       <textarea name="review" rows="8" cols="80" maxlength="1000"></textarea>
-    </p>
-    <p>
-      Genre: <br />
-      <select name="genre">
-        <option value="">Valitse</option>
-        <option value="Dekkarit">Dekkarit</option>
-        <option value="Klassikot">Klassikot</option>
-        <option value="Kauhu">Kauhu</option>
-        <option value="Romantiikka">Romantiikka</option>
-        <option value="Fantasia">Fantasia</option>
-        <option value="Lapset ja nuoret">Lapset ja nuoret</option>
-        <option value="Elämäkerrat">Elämäkerrat</option>
-      </select>
     </p>
     <input type="submit" value="Luo arvostelu" />
   </form>
