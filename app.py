@@ -84,7 +84,15 @@ def edit_book(book_id):
         abort(404)
     if book["user_id"] != session["user_id"]:
         abort(403)
-    return render_template("edit_book.html", book=book)
+
+    all_classes = books.get_all_classes()
+    classes = {}
+    for my_class in all_classes:
+        classes[my_class] = ""
+    for entry in books.get_classes(book_id):
+        classes[entry["title"]] = entry["value"]
+
+    return render_template("edit_book.html", book=book, classes=classes, all_classes=all_classes)
 
 @app.route("/update_book", methods=["POST"])
 def update_book():
@@ -98,7 +106,13 @@ def update_book():
 
     review = request.form["review"]
 
-    books.update_book(book_id, review)
+    classes = []
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts = entry.split(":")
+            classes.append((parts[0], parts[1]))
+
+    books.update_book(book_id, review, classes)
 
     return redirect("/book/"+str(book_id))
 
