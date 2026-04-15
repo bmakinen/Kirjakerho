@@ -66,11 +66,17 @@ def create_book():
         abort(403)
     user_id = session["user_id"]
 
+    all_classes = books.get_all_classes()
+
     classes = []
     for entry in request.form.getlist("classes"):
         if entry:
-            parts = entry.split(":")
-            classes.append((parts[0], parts[1]))
+            class_title, class_value = entry.split(":")
+            if class_title not in all_classes:
+                abort(403)
+            if class_value not in all_classes[class_title]:
+                abort(403)
+            classes.append((class_title, class_value))
 
     books.add_book(title, author, review, user_id, classes)
 
@@ -106,11 +112,17 @@ def update_book():
 
     review = request.form["review"]
 
+    all_classes = books.get_all_classes()
+
     classes = []
     for entry in request.form.getlist("classes"):
         if entry:
-            parts = entry.split(":")
-            classes.append((parts[0], parts[1]))
+            class_title, class_value = entry.split(":")
+            if class_title not in all_classes:
+                abort(403)
+            if class_value not in all_classes[class_title]:
+                abort(403)
+            classes.append((class_title, class_value))
 
     books.update_book(book_id, review, classes)
 
