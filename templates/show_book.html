@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-    <title>{{ book.title }}</title>
-</head>
+{% block title %}{{ book.title }}{% endblock %}
 
-<body>
-    <h1>{{ book.title }}</h1>
-    {% if session.user_id == book.user_id %}
-    <p>
-        <a href="/edit_book/{{ book.id }}">Muokkaa</a>
-        <a href="/remove_book/{{ book.id }}">Poista</a>
-    </p>
-    {% endif %}
-    <p>
-        {{ book.author }}
-    </p>
-    {% if classes %}
-    <ul>
-        {% for class in classes %}
-        <li>{{ class.title }}: {{ class.value }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <p>
-        Arvostelu: {{ book.review }}
-    </p>
-    <p>
-        Käyttäjä: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
-    </p>
-    <p>
-        <a href="/">Takaisin</a>
-    </p>
-</body>
-
-</html>
+{% block content %}
+<h2>{{ book.title }}</h2>
+{% if session.user_id == book.user_id %}
+<p>
+    <a href="/edit_book/{{ book.id }}">Muokkaa</a>
+    <a href="/remove_book/{{ book.id }}">Poista</a>
+</p>
+{% endif %}
+<p>
+    {{ book.author }}
+</p>
+{% if classes %}
+<ul>
+    {% for class in classes %}
+    <li>{{ class.title }}: {{ class.value }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<p>
+    Arvostelu: {{ book.review }}
+</p>
+<p>
+    Käyttäjä: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
+</p>
+{% endblock %}

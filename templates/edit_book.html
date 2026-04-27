@@ -1,35 +1,29 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-    <title> Arvostelun muokkaus </title>
-</head>
+{% block title %}Arvostelun muokkaus{% endblock %}
 
-<body>
-    <h1> Arvostelun muokkaus </h1>
-    <form action="/update_book" method="post">
-    {% for class in all_classes %}
-    <p>
-        {{ class }}: <br />
-        <select name="classes">
-            <option value="">valitse</option>
-        {% for option in all_classes[class] %}
-            {% if classes[class] == option %}
-            <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
-            {% else %}
-            <option value="{{ class }}:{{ option }}">{{ option }}</option>
-            {% endif %}
-        {% endfor %}
-        </select>
-    </p>
+{% block content %}
+<h2> Arvostelun muokkaus </h2>
+<form action="/update_book" method="post">
+{% for class in all_classes %}
+<p>
+    {{ class }}: <br />
+    <select name="classes">
+        <option value="">valitse</option>
+    {% for option in all_classes[class] %}
+        {% if classes[class] == option %}
+        <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
+        {% else %}
+        <option value="{{ class }}:{{ option }}">{{ option }}</option>
+        {% endif %}
     {% endfor %}
-            Arvostelu: <br />
-            <textarea name="review" rows="8" cols="80">{{ book.review }}</textarea>
-        </p>
-        <input type="hidden" name="book_id" value="{{ book.id }}"/>
-        <input type="submit" value="Päivitä arvostelua" />
-    </form>
-</body>
-
-
-</html>
+    </select>
+</p>
+{% endfor %}
+        Arvostelu: <br />
+        <textarea name="review" rows="8" cols="80">{{ book.review }}</textarea>
+    </p>
+    <input type="hidden" name="book_id" value="{{ book.id }}"/>
+    <input type="submit" value="Päivitä arvostelua" />
+</form>
+{% endblock %}

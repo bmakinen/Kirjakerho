@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-    <title>Käyttäjä {{ user.username }}</title>
-</head>
+{% block title %}Käyttäjä {{user.username}}{% endblock %}
 
-<body>
-    <h1>Käyttäjä {{ user.username }}</h1>
-    <p>
-        Käyttäjällä on yhteensä {{ books | count }} arvostelua.
-    </p>
-    <h2>Arvostelut</h2>
-    <ul>
-        {% for book in books %}
-        <li><a href="/book/{{ book.id }}">{{ book.title }}</a></li>
-        {% endfor %}
-    </ul>
-    <p>
-        <a href="/">Takaisin</a>
-    </p>
-</body>
-
-</html>
+{% block content %}
+<h2>Käyttäjä {{ user.username }}</h2>
+<p>
+    Käyttäjällä on yhteensä {{ books | count }} arvostelua.
+</p>
+<h3>Arvostelut</h3>
+<ul>
+    {% for book in books %}
+    <li><a href="/book/{{ book.id }}">{{ book.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
