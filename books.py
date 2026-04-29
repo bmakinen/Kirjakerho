@@ -29,7 +29,10 @@ def get_classes(book_id):
     return db.query(sql, [book_id])
 
 def get_books():
-    sql = "SELECT id, title, author FROM books ORDER BY id DESC"
+    sql = """SELECT books.id, books.title, books.author, users.id user_id, users.username
+        FROM books, users
+        WHERE books.user_id = users.id
+        ORDER BY books.id DESC"""
     return db.query(sql)
 
 

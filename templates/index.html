@@ -5,9 +5,12 @@
 {% block content %}
 <h2>Kirja-arvostelut</h2>
 
-<ul>
-  {% for book in books %}
-  <li><a href="/book/{{ book.id }}">{{ book.title }}</a></li>
-  {% endfor %}
-</ul>
+
+{% for book in books %}
+<div class="/book">
+<a href="/book/{{ book.id }}">{{ book.title }}</a> <br />
+Kirjailija: {{ book.author }} <br />
+Arvostelija: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
+</div>
+{% endfor %}
 {% endblock %}
