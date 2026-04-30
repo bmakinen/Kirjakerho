@@ -24,6 +24,8 @@ def add_book(title, author, review, user_id, classes):
     for title, value in classes:
         db.execute(sql, [book_id, title, value])
 
+    return book_id
+
 def get_classes(book_id):
     sql = "SELECT title, value FROM book_classes WHERE book_id = ?"
     return db.query(sql, [book_id])

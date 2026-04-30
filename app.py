@@ -78,9 +78,8 @@ def create_book():
                 abort(403)
             classes.append((class_title, class_value))
 
-    books.add_book(title, author, review, user_id, classes)
-
-    return redirect("/")
+    book_id = books.add_book(title, author, review, user_id, classes)
+    return redirect("/book/" + str(book_id))
 
 @app.route("/edit_book/<int:book_id>")
 def edit_book(book_id):
