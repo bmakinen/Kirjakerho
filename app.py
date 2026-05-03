@@ -1,10 +1,11 @@
 import sqlite3
 import secrets
+
 from flask import Flask
 from flask import abort, flash, redirect, render_template, request, session
 import markupsafe
+
 import config
-import db
 import books
 import users
 
@@ -37,8 +38,8 @@ def show_user(user_id):
     user = users.get_user(user_id)
     if not user:
         abort(404)
-    books = users.get_books(user_id)
-    return render_template("show_user.html", user=user, books=books)
+    user_books = users.get_books(user_id)
+    return render_template("show_user.html", user=user, books=user_books)
 
 @app.route("/find_book")
 def find_book():
@@ -156,14 +157,13 @@ def remove_book(book_id):
 
     if request.method == "GET":
         return render_template("remove_book.html", book=book)
-    
+
     if request.method == "POST":
         check_csrf()
         if "remove" in request.form:
             books.remove_book(book_id)
             return redirect("/")
-        else:
-            return redirect("/book/" + str(book_id))
+        return redirect("/book/" + str(book_id))
 
 @app.route("/register")
 def register():
@@ -192,7 +192,7 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
 
-    if request.method == "POST":    
+    if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
 

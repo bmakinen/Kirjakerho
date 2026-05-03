@@ -21,8 +21,8 @@ def add_book(title, author, review, user_id, classes):
     book_id = db.last_insert_id()
 
     sql = "INSERT INTO book_classes (book_id, title, value) VALUES (?, ?, ?)"
-    for title, value in classes:
-        db.execute(sql, [book_id, title, value])
+    for class_title, value in classes:
+        db.execute(sql, [book_id, class_title, value])
 
     return book_id
 
