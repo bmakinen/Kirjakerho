@@ -63,6 +63,7 @@ def show_book(book_id):
 def new_book():
     require_login()
     classes = books.get_all_classes()
+    session["csrf_token"] = secrets.token_hex(16)
     return render_template("new_book.html", classes=classes)
 
 @app.route("/create_book", methods=["POST"])
@@ -119,7 +120,6 @@ def edit_book(book_id):
 @app.route("/update_book", methods=["POST"])
 def update_book():
     require_login()
-    check_csrf()
     book_id = request.form["book_id"]
     book = books.get_book(book_id)
     if not book:
