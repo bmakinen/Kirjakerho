@@ -8,8 +8,8 @@
 <form action="/update_book" method="post">
 {% for class in all_classes %}
 <p>
-    {{ class }}: <br />
-    <select name="classes">
+    <label for="class{{ class }}">{{ class }}</label>: <br />
+    <select name="classes" id="class{{ class }}">
         <option value="">valitse</option>
     {% for option in all_classes[class] %}
         {% if classes[class] == option %}
@@ -21,8 +21,8 @@
     </select>
 </p>
 {% endfor %}
-        Arvostelu: <br />
-        <textarea name="review" rows="8" cols="80">{{ book.review }}</textarea>
+        <label for="review">Arvostelu</label>: <br />
+        <textarea name="review" id="review" rows="8" cols="80">{{ book.review }}</textarea>
     </p>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
     <input type="hidden" name="book_id" value="{{ book.id }}"/>
