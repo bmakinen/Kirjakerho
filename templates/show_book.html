@@ -19,7 +19,7 @@
 </ul>
 {% endif %}
 <p>
-    Arvostelu: {{ book.review }}
+    Arvostelu: {{ book.review | show_lines }}
 </p>
 <p>
     Käyttäjä: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>

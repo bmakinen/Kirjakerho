@@ -2,6 +2,7 @@ import sqlite3
 import secrets
 from flask import Flask
 from flask import abort, flash, redirect, render_template, request, session
+import markupsafe
 import config
 import db
 import books
@@ -19,6 +20,12 @@ def check_csrf():
         abort(403)
     if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
+
+@app.template_filter()
+def show_lines(content):
+    content = str(markupsafe.escape(content))
+    content = content.replace("\n", "<br />")
+    return markupsafe.Markup(content)
 
 @app.route("/")
 def index():
@@ -103,6 +110,8 @@ def edit_book(book_id):
         classes[my_class] = ""
     for entry in books.get_classes(book_id):
         classes[entry["title"]] = entry["value"]
+
+    session["csrf_token"] = secrets.token_hex(16)
 
     return render_template("edit_book.html", book=book, classes=classes, all_classes=all_classes)
 

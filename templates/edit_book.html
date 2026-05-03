@@ -24,7 +24,7 @@
         Arvostelu: <br />
         <textarea name="review" rows="8" cols="80">{{ book.review }}</textarea>
     </p>
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
     <input type="hidden" name="book_id" value="{{ book.id }}"/>
     <input type="submit" value="Päivitä arvostelua" />
 </form>
