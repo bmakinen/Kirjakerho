@@ -3,7 +3,8 @@
 {% block title %}Arvostelun muokkaus{% endblock %}
 
 {% block content %}
-<h2> Arvostelun muokkaus </h2>
+<h2>{{ book.title }}</h2>
+<h3> Arvostelun muokkaus </h3>
 <form action="/update_book" method="post">
 {% for class in all_classes %}
 <p>
@@ -26,4 +27,7 @@
     <input type="hidden" name="book_id" value="{{ book.id }}"/>
     <input type="submit" value="Päivitä arvostelua" />
 </form>
+<p>
+    <a href="/book/{{ book.id }}">Takaisin arvosteluun</a>
+</p>
 {% endblock %}

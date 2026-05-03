@@ -10,9 +10,7 @@
     <a href="/remove_book/{{ book.id }}">Poista</a>
 </p>
 {% endif %}
-<p>
-    {{ book.author }}
-</p>
+<h3>{{ book.author }}</h3>
 {% if classes %}
 <ul>
     {% for class in classes %}
